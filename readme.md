@@ -1,6 +1,6 @@
 # The Data Scientist's Guide to Apache Spark
 
-[![Join the chat at https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/Jay-Oh-eN/data-scientists-guide-apache-spark)
+[![Join the chat at https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/zipfian/data-scientists-guide-apache-spark)
 
 This repo contains notebook exercises for a workshop teaching the best practices of using Spark for practicing data scientists in the context of a data scientist’s standard workflow. By leveraging Spark’s APIs for Python and R to present practical applications, the technology will be much more accessible by decreasing the barrier to entry.
 
@@ -47,6 +47,8 @@ sc <- sparkR.init(master="local")
 ```
 
 ## Data
+
+`link = 'http://hopelessoptimism.com/static/data/airline-data'`
 
 The notebooks use a few datasets.  For the DonorsChoose data, you can read the documentation [here](http://data.donorschoose.org/) and download a zip (~0.5 gb) from: http://hopelessoptimism.com/static/data/donors_choose.zip
 
