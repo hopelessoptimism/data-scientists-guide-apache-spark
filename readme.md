@@ -48,6 +48,8 @@ sc <- sparkR.init(master="local")
 
 ## Data
 
+`link = 'http://hopelessoptimism.com/static/data/airline-data'`
+
 The notebooks use a few datasets.  For the DonorsChoose data, you can read the documentation [here](http://data.donorschoose.org/) and download a zip (~0.5 gb) from: http://hopelessoptimism.com/static/data/donors_choose.zip
 
 ## IPython Console Help
