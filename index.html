@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>The Data Scientist&#39;s Guide to Apache Spark by Jay-Oh-eN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">The Data Scientist&#39;s Guide to Apache Spark</h1>
+      <h2 class="project-tagline">Best practices of using Spark for practicing data scientists in the context of a data scientist’s standard workflow.</h2>
+      <a href="https://github.com/Jay-Oh-eN/data-scientists-guide-apache-spark" class="btn">View on GitHub</a>
+      <a href="https://github.com/Jay-Oh-eN/data-scientists-guide-apache-spark/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Jay-Oh-eN/data-scientists-guide-apache-spark/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="the-data-scientists-guide-to-apache-spark" class="anchor" href="#the-data-scientists-guide-to-apache-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Data Scientist's Guide to Apache Spark</h1>
+
+<p><a href="https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark"></a> <a href="http://mybinder.org/repo/zipfian/data-scientists-guide-apache-spark"><img src="http://mybinder.org/badge.svg" alt="Binder"></a></p>
+
+<p>This repo contains notebook exercises for a workshop teaching the best practices of using Spark for practicing data scientists in the context of a data scientist’s standard workflow. By leveraging Spark’s APIs for Python and R to present practical applications, the technology will be much more accessible by decreasing the barrier to entry.</p>
+
+<h2>
+<a id="materials" class="anchor" href="#materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials</h2>
+
+<p>For the workshop (and after) we will use a Gitter chatroom to keep the conversation going: <a href="https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark">https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark</a>.</p>
+
+<p>And/or please do not hesitate to reach out to me directly via email at <a href="mailto:jonathan@galvanize.com">jonathan@galvanize.com</a> or over twitter @clearspandex</p>
+
+<p>The presentation can be found on Slideshare <a href="http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark">here</a>.</p>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p>Prior experience with Python and the scientific Python stack is beneficial.  Also knowledge of data science models and applications is preferred.  This will not be an introduction to Machine Learning or Data Science, but rather a course for people proficient in these methods on a small scale to understand how to apply that knowledge in a distributed setting with Spark.</p>
+
+<h3>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<ul>
+<li><a href="http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark/48">Local Installation</a></li>
+<li><a href="http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark/69">Cluster Deployment</a></li>
+</ul>
+
+<h4>
+<a id="sparkr-with-a-notebook" class="anchor" href="#sparkr-with-a-notebook" aria-hidden="true"><span class="octicon octicon-link"></span></a>SparkR with a Notebook</h4>
+
+<ol>
+<li>Install <a href="https://github.com/IRkernel/IRkernel">IRKernel</a>
+</li>
+</ol>
+
+<div class="highlight highlight-source-r"><pre>install.packages(c(<span class="pl-s"><span class="pl-pds">'</span>rzmq<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>repr<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>IRkernel<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>IRdisplay<span class="pl-pds">'</span></span>), <span class="pl-v">repos</span> <span class="pl-k">=</span> c(<span class="pl-s"><span class="pl-pds">'</span>http://irkernel.github.io/<span class="pl-pds">'</span></span>, getOption(<span class="pl-s"><span class="pl-pds">'</span>repos<span class="pl-pds">'</span></span>)))
+
+<span class="pl-e">IRkernel</span><span class="pl-k">::</span>installspec()</pre></div>
+
+<ol>
+<li>Set <a href="https://github.com/apache/spark/tree/master/R#using-sparkr-from-rstudio">environment variables</a>:</li>
+</ol>
+
+<pre><code># Example: Set this to where Spark is installed
+Sys.setenv(SPARK_HOME="/Users/[username]/spark")
+
+# This line loads SparkR from the installed directory
+.libPaths(c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib"), .libPaths()))
+
+# if these two lines work, you are all set
+library(SparkR)
+sc &lt;- sparkR.init(master="local")
+</code></pre>
+
+<h2>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data</h2>
+
+<p><code>link = 'http://hopelessoptimism.com/static/data/airline-data'</code></p>
+
+<p>The notebooks use a few datasets.  For the DonorsChoose data, you can read the documentation <a href="http://data.donorschoose.org/">here</a> and download a zip (~0.5 gb) from: <a href="http://hopelessoptimism.com/static/data/donors_choose.zip">http://hopelessoptimism.com/static/data/donors_choose.zip</a></p>
+
+<h2>
+<a id="ipython-console-help" class="anchor" href="#ipython-console-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>IPython Console Help</h2>
+
+<p>Q: How can I find out all the methods that are available on DataFrame?</p>
+
+<ul>
+<li><p>In the IPython console type <code>sales.[TAB]</code></p></li>
+<li><p>Autocomplete will show you all the methods that are available.</p></li>
+<li><p>To find more information about a specific method, say <code>.cov</code> type <code>help(sales.cov)</code></p></li>
+<li><p>This will display the API documentation for that method.</p></li>
+</ul>
+
+<h2>
+<a id="spark-documentation" class="anchor" href="#spark-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spark Documentation</h2>
+
+<p>Q: How can I find out more about Spark's Python API, MLlib, GraphX,
+Spark Streaming, deploying Spark to EC2?</p>
+
+<ul>
+<li><p>Go to <a href="https://spark.apache.org/docs/latest">https://spark.apache.org/docs/latest</a></p></li>
+<li><p>Navigate using tabs to the following areas in particular.</p></li>
+<li><p>Programming Guide &gt; Quick Start, Spark Programming Guide,
+Spark Streaming, DataFrames and SQL, MLlib, GraphX, SparkR.</p></li>
+<li><p>Deploying &gt; Overview, Submitting Applications, Spark Standalone,
+YARN, Amazon EC2.</p></li>
+<li><p>More &gt; Configuration, Monitoring, Tuning Guide.</p></li>
+</ul>
+
+<h2>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
+
+<h3>
+<a id="setup-1" class="anchor" href="#setup-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<ul>
+<li><a href="http://nishutayaltech.blogspot.in/2015/04/how-to-run-apache-spark-on-windows7-in.html">Spark on Windows 7</a></li>
+</ul>
+
+<h3>
+<a id="history-of-computing" class="anchor" href="#history-of-computing" aria-hidden="true"><span class="octicon octicon-link"></span></a>History of Computing</h3>
+
+<ul>
+<li><a href="http://www.technologyreview.com/view/421186/why-cpus-arent-getting-any-faster/">Why CPUs aren't getting any faster</a></li>
+<li><a href="research.yahoo.com/files/cutting.pdf">Hadoop: A brief History</a></li>
+<li><a href="https://spark-summit.org/2013/wp-content/uploads/2013/10/Zaharia-spark-summit-2013-matei.pdf">The State of Spark: And where we are going next</a></li>
+<li><a href="https://blogs.apache.org/foundation/entry/the_apache_software_foundation_announces50">https://blogs.apache.org/foundation/entry/the_apache_software_foundation_announces50</a></li>
+</ul>
+
+<h3>
+<a id="original-papers" class="anchor" href="#original-papers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Original Papers</h3>
+
+<ul>
+<li><a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-12.pdf">Matei's Thesis</a></li>
+<li><a href="https://www.cs.berkeley.edu/%7Ematei/papers/2012/nsdi_spark.pdf">Original (RDD) Paper</a></li>
+</ul>
+
+<h3>
+<a id="data-science-with-spark" class="anchor" href="#data-science-with-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Science with Spark</h3>
+
+<ul>
+<li><a href="http://blog.cloudera.com/blog/2015/07/how-to-do-data-quality-checks-using-apache-spark-dataframes/">http://blog.cloudera.com/blog/2015/07/how-to-do-data-quality-checks-using-apache-spark-dataframes/</a></li>
+</ul>
+
+<h3>
+<a id="distributed-computing" class="anchor" href="#distributed-computing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Distributed Computing</h3>
+
+<ul>
+<li><a href="http://book.mixu.net/distsys/intro.html">Distributed Systems for Fun and Profit</a></li>
+<li><a href="http://queue.acm.org/detail.cfm?id=2371297">Resilience Engineering: Learning to Embrace Failure</a></li>
+<li><a href="https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey">Chaos Monkey</a></li>
+</ul>
+
+<h3>
+<a id="spark-internals" class="anchor" href="#spark-internals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spark Internals</h3>
+
+<ul>
+<li><a href="https://cwiki.apache.org/confluence/display/SPARK/PySpark+Internals">PySpark Internals</a></li>
+<li><a href="https://spark-summit.org/2014/wp-content/uploads/2014/07/A-Deeper-Understanding-of-Spark-Internals-Aaron-Davidson.pdf">A deeper understanding of Spark's internals</a></li>
+</ul>
+
+<h3>
+<a id="spark-performance" class="anchor" href="#spark-performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spark Performance</h3>
+
+<ul>
+<li><a href="http://www.slideshare.net/pwendell/tuning-and-debugging-in-apache-spark">Tuning and Debugging in Apache Spark</a></li>
+<li><a href="https://github.com/databricks/spark-knowledgebase/blob/master/best_practices/prefer_reducebykey_over_groupbykey.md"><code>reduceByKey</code> vs <code>groupByKey</code></a></li>
+<li><a href="https://databricks-training.s3.amazonaws.com/slides/advanced-spark-training.pdf">Advanced Spark</a></li>
+<li><a href="http://stackoverflow.com/questions/26870537/spark-what-is-the-difference-between-cache-and-persist">What's the difference between <code>cache()</code> and <code>persist()</code></a></li>
+<li><a href="http://spark.apache.org/docs/latest/monitoring.html">Monitoring and Instrumentation</a></li>
+</ul>
+
+<h3>
+<a id="spark-deployment" class="anchor" href="#spark-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spark Deployment</h3>
+
+<ul>
+<li><a href="http://radar.oreilly.com/2015/02/a-tale-of-two-clusters-mesos-and-yarn.html">A Tale of two clusters: Mesos vs. YARN</a></li>
+</ul>
+
+<h3>
+<a id="plotly--spark" class="anchor" href="#plotly--spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plotly + Spark</h3>
+
+<ul>
+<li><a href="https://plot.ly/ipython-notebooks/apache-spark/">https://plot.ly/ipython-notebooks/apache-spark/</a></li>
+<li><a href="https://plot.ly/python/ipython-notebooks/">https://plot.ly/python/ipython-notebooks/</a></li>
+<li><a href="https://plot.ly/python/matplotlib-to-plotly-tutorial/#6.1-Matplotlib-to-Plotly-conversion-basics">https://plot.ly/python/matplotlib-to-plotly-tutorial/#6.1-Matplotlib-to-Plotly-conversion-basics</a></li>
+</ul>
+
+<h3>
+<a id="word2vec" class="anchor" href="#word2vec" aria-hidden="true"><span class="octicon octicon-link"></span></a>word2Vec</h3>
+
+<blockquote>
+<p>The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. The resulting word vector file can be used as features in many natural language processing and machine learning applications.</p>
+</blockquote>
+
+<h4>
+<a id="theoryapplication" class="anchor" href="#theoryapplication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Theory/Application</h4>
+
+<ul>
+<li><a href="http://arxiv.org/pdf/1301.3781.pdf">Efficient Estimation of Word Representations in
+Vector Space</a></li>
+<li><a href="http://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases
+and their Compositionality</a></li>
+<li><a href="http://arxiv.org/pdf/1405.4053v2.pdf">Distributed Representations of Sentences and Documents</a></li>
+<li><a href="http://deeplearning4j.org/word2vec.html">deeplearning4j tutorial (with applications)</a></li>
+<li><a href="https://districtdatalabs.silvrback.com/modern-methods-for-sentiment-analysis">Modern Methods for Sentiment Analysis</a></li>
+<li><a href="http://www.folgertkarsdorp.nl/word2vec-an-introduction/">word2vec: an introduction</a></li>
+</ul>
+
+<h4>
+<a id="tools" class="anchor" href="#tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tools</h4>
+
+<ul>
+<li><a href="http://spark.apache.org/docs/latest/mllib-feature-extraction.html#word2vec">Spark MLlib (Python, Scala)</a></li>
+<li><a href="http://deeplearning4j.org/word2vec.html">deeplearning4j (Java)</a></li>
+<li><a href="https://radimrehurek.com/gensim/models/word2vec.html">gensim: word2vec and doc2vec (Python)</a></li>
+</ul>
+
+<h2>
+<a id="books-on-spark" class="anchor" href="#books-on-spark" aria-hidden="true"><span class="octicon octicon-link"></span></a>Books on Spark</h2>
+
+<ul>
+<li><p>Learning Spark: Lightning-Fast Big Data Analytics<br>
+By Holden Karau, Andy Konwinski, Patrick Wendell, Matei Zaharia<br>
+Publisher: O'Reilly Media, June 2014<br>
+<a href="http://shop.oreilly.com/product/0636920028512.do">http://shop.oreilly.com/product/0636920028512.do</a><br>
+Introduction to Spark APIs and underlying concepts.</p></li>
+<li><p>Spark Knowledge Base<br>
+By Databricks, Vida Ha, Pat McDonough<br>
+Publisher: Databricks<br>
+<a href="http://databricks.gitbooks.io/databricks-spark-knowledge-base">http://databricks.gitbooks.io/databricks-spark-knowledge-base</a><br>
+Spark tips, tricks, and recipes.    </p></li>
+<li><p>Spark Reference Applications<br>
+By Databricks, Vida Ha, Pat McDonough<br>
+Publisher: Databricks<br>
+<a href="http://databricks.gitbooks.io/databricks-spark-reference-applications">http://databricks.gitbooks.io/databricks-spark-reference-applications</a><br>
+Best practices for large-scale Spark application architecture.
+Topics include import, export, machine learning, streaming.</p></li>
+</ul>
+
+<h2>
+<a id="learning-scala" class="anchor" href="#learning-scala" aria-hidden="true"><span class="octicon octicon-link"></span></a>Learning Scala</h2>
+
+<ul>
+<li>Scala for the Impatient<br>
+by Cay S. Horstmann<br>
+Publisher: Addison-Wesley Professional, March 2012<br>
+<a href="http://www.amazon.com/Scala-Impatient-Cay-S-Horstmann/dp/0321774094">http://www.amazon.com/Scala-Impatient-Cay-S-Horstmann/dp/0321774094</a><br>
+Concise, to the point, and contains good practical tips on using Scala. </li>
+</ul>
+
+<h2>
+<a id="video-tutorials" class="anchor" href="#video-tutorials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Video Tutorials</h2>
+
+<ul>
+<li><p>Spark Internals<br>
+By Matei Zaharia (Databricks)<br>
+<a href="https://www.youtube.com/watch?v=49Hr5xZyTEA">https://www.youtube.com/watch?v=49Hr5xZyTEA</a>    </p></li>
+<li><p>Spark on YARN<br>
+By Sandy Ryza (Cloudera)<br>
+<a href="https://www.youtube.com/watch?v=N6pJhxCPe-Y">https://www.youtube.com/watch?v=N6pJhxCPe-Y</a>    </p></li>
+<li><p>Spark Programming<br>
+By Pat McDonough (Databricks)<br>
+<a href="https://www.youtube.com/watch?v=mHF3UPqLOL8">https://www.youtube.com/watch?v=mHF3UPqLOL8</a>    </p></li>
+</ul>
+
+<h2>
+<a id="community" class="anchor" href="#community" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community</h2>
+
+<ul>
+<li><p>Community<br>
+<a href="https://spark.apache.org/community.html">https://spark.apache.org/community.html</a><br>
+Spark's community page lists meetups, mailing-lists, and upcoming
+Spark conferences.</p></li>
+<li><p>Meetups<br>
+<a href="http://spark.meetup.com/">http://spark.meetup.com/</a><br>
+Spark has meetups in the Bay Area, NYC, Seattle, and most major
+cities around the world.</p></li>
+<li><p>Mailing Lists<br>
+<a href="https://spark.apache.org/community.html">https://spark.apache.org/community.html</a><br>
+The user mailing list covers issues and best practices around using
+Spark. The dev mailing list is for people who want to contribute to
+Spark.</p></li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Jay-Oh-eN/data-scientists-guide-apache-spark">The Data Scientist&#39;s Guide to Apache Spark</a> is maintained by <a href="https://github.com/Jay-Oh-eN">Jay-Oh-eN</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
