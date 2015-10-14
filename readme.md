@@ -26,11 +26,11 @@ Prior experience with Python and the scientific Python stack is beneficial.  Als
 
 1. Install [IRKernel](https://github.com/IRkernel/IRkernel)
   
-  ```r
-  install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')))
+```r
+install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')))
 
-  IRkernel::installspec()
-  ```
+IRkernel::installspec()
+```
 
 2. Set [environment variables](https://github.com/apache/spark/tree/master/R#using-sparkr-from-rstudio):
 
