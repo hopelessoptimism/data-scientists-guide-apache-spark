@@ -1,1 +1,2 @@
-pyspark
+dependencies:
+  - pyspark
