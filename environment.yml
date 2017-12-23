@@ -1,2 +1,5 @@
 dependencies:
   - pyspark
+  - matplotlib
+  - nltk
+  - numpy
