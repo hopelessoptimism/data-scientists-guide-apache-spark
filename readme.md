@@ -1,15 +1,15 @@
 # The Data Scientist's Guide to Apache Spark
 
-[![Join the chat at https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/hopelessoptimism/data-scientists-guide-apache-spark/master)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/jondinu/data-scientists-guide-apache-spark/master)
 
 
 This repo contains notebook exercises for a workshop teaching the best practices of using Spark for practicing data scientists in the context of a data scientist’s standard workflow. By leveraging Spark’s APIs for Python and R to present practical applications, the technology will be much more accessible by decreasing the barrier to entry.
 
 ## Materials
 
-For the workshop (and after) we will use a Gitter chatroom to keep the conversation going: https://gitter.im/Jay-Oh-eN/data-scientists-guide-apache-spark.
+For the workshop (and after) we will use a Discord chatroom to keep the conversation going: https://discord.gg/avj79xZ
 
-And/or please do not hesitate to reach out to me directly via email at jonathan@galvanize.com or over twitter @clearspandex
+And/or please do not hesitate to reach out to me directly via email at inquiries@jonathan.industries or over twitter @memoryphenome
 
 The presentation can be found on Slideshare [here](http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark).
 
