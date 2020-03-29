@@ -9,7 +9,7 @@ This repo contains notebook exercises for a workshop teaching the best practices
 
 For the workshop (and after) we will use a Discord chatroom to keep the conversation going: https://discord.gg/avj79xZ
 
-And/or please do not hesitate to reach out to me directly via email at inquiries@jonathan.industries or over twitter @memoryphenome
+And/or please do not hesitate to reach out to me directly via email at inquiries@jonathan.industries or over twitter @memoryphoneme
 
 The presentation can be found on Slideshare [here](http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark).
 
