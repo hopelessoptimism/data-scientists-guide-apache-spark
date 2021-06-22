@@ -1,7 +1,6 @@
 # The Data Scientist's Guide to Apache Spark
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/jondinu/data-scientists-guide-apache-spark/master)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jonathandinu/scaling-data-science/HEAD)
 [![Discord badge](https://img.shields.io/discord/830547562385113149?style=flat-square&color=%235865F2)](https://discord.gg/nbyZ6EpUum)
 [![Twitter Follow badge](https://img.shields.io/badge/twitter-@jonathandinu-1da1f2?style=flat-square&logo=twitter)](https://twitter.com/jonathandinu)
 [![YouTube Channel Subscribers](https://img.shields.io/badge/youtube-subscribe-FF0000?logo=youtube&style=flat-square)](https://www.youtube.com/channel/UCi0Hd3U6xb4V0ApUhAIfu9Q)
