@@ -5,56 +5,54 @@
 [![Twitter Follow badge](https://img.shields.io/badge/twitter-@jonathandinu-1da1f2?style=flat-square&logo=twitter)](https://twitter.com/jonathandinu)
 [![YouTube Channel Subscribers](https://img.shields.io/badge/youtube-subscribe-FF0000?logo=youtube&style=flat-square)](https://www.youtube.com/channel/UCi0Hd3U6xb4V0ApUhAIfu9Q)
 
+## Overview
 
 This repo contains notebook exercises for a workshop teaching the best practices of using Spark for practicing data scientists in the context of a data scientist’s standard workflow. By leveraging Spark’s APIs for Python and R to present practical applications, the technology will be much more accessible by decreasing the barrier to entry.
 
 ## Materials
 
-For the workshop (and after) we will use a Discord chatroom to keep the conversation going: https://discord.gg/avj79xZ
+There are corresponding videos on Youtube walking through and presenting the materials in here.
 
-And/or please do not hesitate to reach out to me directly via email at inquiries@jonathan.industries or over twitter @memoryphoneme
+> If you find any errors in the code or materials, please open a Github issue in this repository or send an email to inquiries@jonathan.industries
 
-The presentation can be found on Slideshare [here](http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark).
+## Skill Level
 
+Beginner to Intermediate
+
+## Learn How To
+* Use Python for distributed computing
+* Scale data processing with Spark
+* Conduct exploratory data analysis with PySpark
+* Utilize parallel computing with Ray
+* Scale machine learning and artificial intelligence applications with Ray
+
+## Who Should Take This Course
+
+This course is a good fit for anyone who needs to improve their fundamental understanding of scalable data processing with Python for use in machine learning or artificial intelligence applications.
 
 ## Prerequisites
 
-Prior experience with Python and the scientific Python stack is beneficial.  Also knowledge of data science models and applications is preferred.  This will not be an introduction to Machine Learning or Data Science, but rather a course for people proficient in these methods on a small scale to understand how to apply that knowledge in a distributed setting with Spark.
+* A basic understanding of programming in Python (variables, basic control flow, simple scripts).
+* Familiarity with the vocabulary of data processing at scale, machine learning (dataset, training set, test set, model), and AI helpful but not required.
 
-### Setup
+## Getting Started
 
-* [Local Installation](http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark/48)
-* [Cluster Deployment](http://www.slideshare.net/jonathandinu/the-data-scientists-guide-to-apache-spark/69)
-
-#### SparkR with a Notebook
-
-1. Install [IRKernel](https://github.com/IRkernel/IRkernel)
-  
-```r
-install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')))
-
-IRkernel::installspec()
-```
-
-2. Set [environment variables](https://github.com/apache/spark/tree/master/R#using-sparkr-from-rstudio):
+To run locally in a docker container 👇
 
 ```
-# Example: Set this to where Spark is installed
-Sys.setenv(SPARK_HOME="/Users/[username]/spark")
-
-# This line loads SparkR from the installed directory
-.libPaths(c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib"), .libPaths()))
-
-# if these two lines work, you are all set
-library(SparkR)
-sc <- sparkR.init(master="local")
+make jupyter
 ```
 
-## Data
+or 
 
-`link = 'http://hopelessoptimism.com/static/data/airline-data'`
+```
+docker run -p 8888:8888 -p 8265:8265 -p 8000:8000 -p 8089:8089 -v $(pwd):/home/jovyan/ --pull 'always' psychothan/scaling-data-science
+```
 
-The notebooks use a few datasets.  For the DonorsChoose data, you can read the documentation [here](http://data.donorschoose.org/) and download a zip (~0.5 gb) from: http://hopelessoptimism.com/static/data/donors_choose.zip
+Then open a web browser to the URL it spits out (the Jupyter server in the container uses [token authentication](https://jupyter-notebook.readthedocs.io/en/stable/security.html))
+
+![notebook url](images/console.png)
+![jupyter notebook](images/notebook.png)
 
 ## IPython Console Help
 
@@ -222,4 +220,26 @@ Community
   Spark. The dev mailing list is for people who want to contribute to
   Spark.
 
+## LICENSE
+
+<p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jonathanjonathanjonathan.com">Jonathan Dinu</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0</a></p>
+
+### You are free to:
+
+* __Share__ — copy and redistribute the material in any medium or format
+* __Adapt__ — remix, transform, and build upon the material
+for any purpose, even commercially.
+
+_The licensor cannot revoke these freedoms as long as you follow the license terms._
+
+### Under the following terms:
+
+* __Attribution__ — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+* __No additional restrictions__ — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+### Notices:
+
+You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+
+No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
 
